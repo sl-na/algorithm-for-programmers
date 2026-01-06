@@ -10,6 +10,7 @@ def bubble_sort(A: list[int], N: int):
                 sw += 1
     return sw
 
+
 def main():
     A: list[int] = [] * 100
     N = int(input())
@@ -22,6 +23,7 @@ def main():
         print(A[i], end="")
     print()
     print(sw)
+
 
 if __name__ == "__main__":
     main()

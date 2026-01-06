@@ -1,9 +1,11 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Card:
     suit: str
     value: int
+
 
 def bubble(A, N: int):
     for i in range(N):
@@ -12,6 +14,7 @@ def bubble(A, N: int):
                 t: Card = A[j]
                 A[j] = A[j - 1]
                 A[j - 1] = t
+
 
 def selection(A, N: int):
     for i in range(N):
@@ -23,6 +26,7 @@ def selection(A, N: int):
         A[i] = A[minj]
         A[minj] = t
 
+
 def print_card(A, N: int):
     for i in range(N):
         if i > 0:
@@ -30,12 +34,14 @@ def print_card(A, N: int):
         print(f"{A[i].suit}{A[i].value}", end="")
     print()
 
+
 def is_stable(C1, C2, N: int):
     for i in range(N):
         if C1[i].suit != C2[i].suit:
             return False
     return True
-    
+
+
 def main():
     C1 = [Card] * 100
     C2 = [Card] * 100
@@ -56,6 +62,7 @@ def main():
         print("Stable")
     else:
         print("Not stable")
+
 
 if __name__ == "__main__":
     main()

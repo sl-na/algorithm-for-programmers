@@ -1,5 +1,6 @@
 MAX = 200000
 
+
 def main():
     n = int(input())
     R = [0] * MAX
@@ -15,6 +16,7 @@ def main():
         minv = min(minv, i)
 
     print(maxv)
+
 
 if __name__ == "__main__":
     main()
