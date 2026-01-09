@@ -8,7 +8,7 @@ def main():
     for i in range(n):
         R[i] = int(input())
 
-    maxv = -200000000
+    maxv = -2000000000
     minv = R[0]
 
     for i in R[1:n]:

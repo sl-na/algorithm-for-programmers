@@ -30,7 +30,7 @@ def main():
     n = int(input())
     A = [0] * 1000000
     for i in range(n):
-        A[i] = int(sys.stdin.buffer.readline())
+        A[i] = int(sys.stdin.readline())
     shell_sort(A, n)
     print(len(G))
     for i in range(len(G) - 1, -1, -1):
