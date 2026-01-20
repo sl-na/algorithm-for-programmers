@@ -54,7 +54,7 @@ def main():
     nl = validate_list(nl)
     if n != len(nl):
         raise ValueError(
-            "the length of the second input must be the same as the first input value. or there is an out-of-range value in the input."
+            "the length of the second input must be the same as the first input value. or there is an out of range value in the input."
         )
     merge_sort(nl, 0, n)
     for index, value in enumerate(nl):
