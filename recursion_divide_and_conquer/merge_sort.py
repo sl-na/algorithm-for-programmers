@@ -1,4 +1,5 @@
 from sys import stdin
+from math import inf
 
 cnt = 0
 
@@ -14,29 +15,18 @@ def validate_list(nl):
 
 
 def merge(nl, left, mid, right):
-    left_l = nl[left:mid]
-    right_l = nl[mid:right]
+    left_l = nl[left:mid] + [inf]
+    right_l = nl[mid:right] + [inf]
     i = j = 0
     k = left
     global cnt
-    while i < len(left_l) and j < len(right_l):
+    for k in range(left, right):
         if left_l[i] <= right_l[j]:
             nl[k] = left_l[i]
             i += 1
         else:
             nl[k] = right_l[j]
             j += 1
-        cnt += 1
-        k += 1
-    while i < len(left_l):
-        nl[k] = left_l[i]
-        i += 1
-        k += 1
-        cnt += 1
-    while j < len(right_l):
-        nl[k] = right_l[j]
-        j += 1
-        k += 1
         cnt += 1
 
 
