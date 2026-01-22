@@ -10,7 +10,7 @@ class Card:
 
 
 def validate_list(card_list):
-    return [i for i in card_list if 0 <= i.value <= 10**9]
+    return [i for i in card_list if 1 <= i.value <= 10**9]
 
 
 def merge(bl, left, mid, right):
