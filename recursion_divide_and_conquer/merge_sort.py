@@ -5,13 +5,7 @@ cnt = 0
 
 
 def validate_list(nl):
-    validated_l = []
-    for i in nl:
-        if 0 <= i <= 10**9:
-            validated_l.append(i)
-        else:
-            pass
-    return validated_l
+    return [i for i in nl if 0 <= i <= 10**9]
 
 
 def merge(nl, left, mid, right):
