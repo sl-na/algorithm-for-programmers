@@ -1,76 +1,80 @@
-import sys
-from collections import deque
+from sys import stdin
 
 
-def validate_key(key: int):
-    if 0 <= key <= 10**10 - 1:
-        return True
-    else:
-        return False
+class Node:
+    def __init__(self, key=None):
+        if key is not None and not (0 <= key <= 1234566890):
+            return None
+        self.key = key
+        self.next = None
+        self.prev = None
 
 
-def insert(nodes: deque[int], key: int):
-    if validate_key(key):
-        nodes.appendleft(key)
-    else:
-        pass
+class LinkedList:
+    sentinel: Node
 
+    def __init__(self):
+        self.sentinel = Node()
+        self.sentinel.next = self.sentinel
+        self.sentinel.prev = self.sentinel
 
-def delete(nodes: deque[int], key: int):
-    if not nodes:
-        raise ValueError("nodes is empty. cannot delete key")
-    for node in nodes:
-        if node == key:
-            nodes.remove(node)
-            break
-    else:
-        pass
+    def insert(self, key):
+        x = Node(key)
+        x.next = self.sentinel.next
+        self.sentinel.next.prev: Node = x
+        self.sentinel.next = x
+        x.prev = self.sentinel
 
+    def list_search(self, key):
+        cur = self.sentinel.next
+        while cur is not None and cur != self.sentinel and cur.key != key:
+            cur = cur.next
+        return cur
 
-def deleteFirst(nodes: deque[int], key=None):
-    if not nodes:
-        raise ValueError("nodes is empty. cannot delete first node")
-    else:
-        nodes.popleft()
+    def delete_node(self, t):
+        if t == self.sentinel:
+            return
+        t.prev.next = t.next
+        t.next.prev = t.prev
 
+    def delete_first(self):
+        self.delete_node(self.sentinel.next)
 
-def deleteLast(nodes: deque[int], key=None):
-    if not nodes:
-        raise ValueError("nodes is empty. cannot delete last node")
-    else:
-        nodes.pop()
+    def delete_last(self):
+        self.delete_node(self.sentinel.prev)
 
+    def delete_key(self, key):
+        self.delete_node(self.list_search(key))
 
-def print_list(nodes: deque[int]):
-    for i, node in enumerate(nodes):
-        if i == len(nodes) - 1:
-            print(node)
-        else:
-            print(node, end=" ")
+    def print_list(self):
+        cur = self.sentinel.next
+        output = []
+        while cur is not None and cur != self.sentinel:
+            output.append(str(cur.key))
+            cur = cur.next
+        print(" ".join(output))
 
 
 def main():
-    n = int(sys.stdin.readline())
-    if n > 2000000:
-        raise ValueError("command most not exceed 2000000")
-    nodes: deque[int] = deque(maxlen=n)
-    input_line = sys.stdin.read().splitlines()
+    n = int(stdin.readline())
+    nodes = LinkedList()
+    input_line = stdin.read().splitlines()
     if len(input_line) != n:
-        raise ValueError("input data length is not equal to the first input data")
+        raise ValueError("invalid input")
     for line in input_line:
-        i = line.split()
-        if len(i) == 1:
-            func = i[0]
-        elif len(i) == 2:
-            func = i[0]
-            key = int(i[1])
+        input = line.split()
+        func = input[0]
+        if func == "insert":
+            nodes.insert(int(input[1]))
+        elif func == "delete":
+            nodes.delete_key(int(input[1]))
+        elif func == "deleteFirst":
+            nodes.delete_first()
+        elif func == "deleteLast":
+            nodes.delete_last()
         else:
-            raise ValueError("wrong input data")
-        select_func = globals().get(func)
-        if not callable(select_func):
-            raise ValueError("wrong function name")
-        select_func(nodes, key)
-    print_list(nodes)
+            raise ValueError("invalid input")
+    nodes.print_list()
 
 
 if __name__ == "__main__":
