@@ -55,7 +55,6 @@ def main():
             bt[left].parent = id
         if right != NIL:
             bt[right].parent = id
-    root = 0
     for index, node in enumerate(bt):
         if node.parent == NIL:
             root = index
