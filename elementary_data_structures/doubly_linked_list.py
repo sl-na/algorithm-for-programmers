@@ -3,7 +3,7 @@ from sys import stdin
 
 class Node:
     def __init__(self, key=None):
-        if key is not None and not (0 <= key <= 1234566890):
+        if key is not None and not (0 <= key <= 1_000_000_000):
             return None
         self.key = key
         self.next = None
